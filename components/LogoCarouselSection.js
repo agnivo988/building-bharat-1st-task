@@ -1,78 +1,61 @@
-'use client'
+"use client";
 
-import Image from 'next/image'
-import { useEffect, useRef } from 'react'
+import Marquee from "react-fast-marquee";
+import Image from "next/image";
 
 const logos = [
-  '/logos/dex.png',
-  '/logos/political.png',
-  '/logos/cvoter.png',
-  '/logos/bimarc.png',
-  '/logos/smartneta.png',
-  '/logos/3c.png',
-]
+  "/dex.png",
+  "/3c.png",
+  "/political.png",
+  "/cvoter.png",
+  "/bimarc.png",
+  "/smartneta.png",
+];
 
 export default function LogoCarouselSection() {
-  const scrollRef = useRef(null)
+  const middleLogo = "/logo.jpg"; 
 
-  useEffect(() => {
-    const container = scrollRef.current
-    let scrollAmount = 0
-    const scrollStep = 1
-    let animationFrame
-
-    const scrollLogos = () => {
-      if (container) {
-        scrollAmount += scrollStep
-        container.scrollLeft = scrollAmount
-        if (scrollAmount >= container.scrollWidth / 2) {
-          scrollAmount = 0 // reset
-        }
-        animationFrame = requestAnimationFrame(scrollLogos)
-      }
-    }
-
-    animationFrame = requestAnimationFrame(scrollLogos)
-    return () => cancelAnimationFrame(animationFrame)
-  }, [])
+  const firstHalf = logos.slice(0, Math.ceil(logos.length / 2));
+  const secondHalf = logos.slice(Math.ceil(logos.length / 2));
 
   return (
-    <section className="bg-white py-12 px-4 md:px-16 relative">
-      <h2 className="text-center text-2xl md:text-3xl font-semibold text-gray-800 mb-10">
+    <div className="py-10 px-4 bg-white">
+      <h2 className="text-center text-2xl font-bold text-primary mb-4">
         Our Network & Strategic Influencers
       </h2>
+      <Marquee gradient={false} speed={80} pauseOnHover>
+        <div className="flex items-center gap-10">
+          {firstHalf.map((logo, index) => (
+            <Image
+              key={`first-${index}`}
+              src={logo}
+              alt={`Partner logo ${index + 1}`}
+              width={120}
+              height={60}
+              className="object-contain w-28 h-auto"
+            />
+          ))}
 
-      <div className="relative flex justify-center items-center">
-        {/* Center Logo */}
-        <div className="z-10 relative bg-white shadow-lg rounded-xl p-6 border border-orange-300">
           <Image
-            src="/logos/logo.jpg"
-            alt="Building Bharat"
-            width={150}
-            height={150}
-            className="mx-auto"
+            src={middleLogo}
+            alt="Building Bharat Logo"
+            width={140}
+            height={70}
+            className="object-contain w-36 h-auto mx-6"
           />
-        </div>
 
-        {/* Scrolling Logos */}
-        <div className="absolute w-full overflow-hidden">
-          <div
-            className="flex gap-8 items-center whitespace-nowrap px-20 animate-none"
-            ref={scrollRef}
-          >
-            {[...logos, ...logos].map((logo, i) => (
-              <Image
-                key={i}
-                src={logo}
-                alt={`partner-${i}`}
-                width={90}
-                height={90}
-                className="object-contain"
-              />
-            ))}
-          </div>
+          {secondHalf.map((logo, index) => (
+            <Image
+              key={`second-${index}`}
+              src={logo}
+              alt={`Partner logo ${index + 1 + firstHalf.length}`}
+              width={120}
+              height={60}
+              className="object-contain w-28 h-auto"
+            />
+          ))}
         </div>
-      </div>
-    </section>
-  )
+      </Marquee>
+    </div>
+  );
 }

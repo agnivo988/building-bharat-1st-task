@@ -1,26 +1,32 @@
-export default function LogoCarousel() {
-  const logos = [
-    { src: "/dex.png", alt: "Dex" },
-    { src: "/smartneta.png", alt: "Smart Neta" },
-    { src: "/political.png", alt: "Political" },
-    { src: "/cvoter.png", alt: "Cvoter" },
-    { src: "/3c.png", alt: "3C" },
-    { src: "/bimarc.png", alt: "Bimarc Neta" },
-  ];
+'use client'
+import Marquee from 'react-fast-marquee'
+import Image from 'next/image'
 
+const logos = [
+  '/dex.png',
+  '/cvoter.png',
+  '/3c.png',
+  '/bimarc.png',
+  '/smartneta.png',
+  '/political.png'
+]
+
+export default function LogoCarousel() {
   return (
-    <div className="overflow-hidden bg-white py-6">
-      <div className="flex gap-10 animate-scroll">
-        {logos.concat(logos).map((logo, index) => (
-          <div key={index} className="flex-shrink-0">
-            <img
-              src={logo.src}
-              alt={logo.alt}
-              className="h-12 w-auto object-contain"
+    <div className="w-full py-6 bg-white">
+      <Marquee speed={100} pauseOnHover gradient={false} className="flex items-center">
+        {logos.map((logo, index) => (
+          <div key={index} className="mx-8 min-w-[120px] flex items-center justify-center">
+            <Image
+              src={logo}
+              alt={`Partner Logo ${index + 1}`}
+              width={100}
+              height={60}
+              className="object-contain h-12 w-auto"
             />
           </div>
         ))}
-      </div>
+      </Marquee>
     </div>
-  );
+  )
 }
