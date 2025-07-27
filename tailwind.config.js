@@ -43,10 +43,15 @@ module.exports = {
             transform: 'translateY(0)',
           },
         },
+        'scroll-x': {
+      '0%': { transform: 'translateX(0)' },
+      '100%': { transform: 'translateX(-50%)' },
+        }
       },
       animation: {
         marquee: 'marquee 25s linear infinite',
         fadeInUp: 'fadeInUp 0.8s ease-out both',
+        'scroll-x': 'scroll-x 25s linear infinite',
       },
       borderRadius: {
         xl: '1rem',

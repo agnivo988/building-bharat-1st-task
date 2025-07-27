@@ -58,15 +58,16 @@ export default function FeatureSection() {
               ))}
             </ul>
           </div>
-          <div className="md:w-1/2">
-            <Image
-              src={feature.image}
-              alt={feature.title}
-              width={600}
-              height={400}
-              className="rounded-xl shadow-md"
-            />
-          </div>
+          <div className="group relative w-full h-auto overflow-hidden rounded-xl shadow-md">
+  <Image
+    src={feature.image}
+    alt={feature.title}
+    width={600}
+    height={400}
+    className="transition-all duration-500 ease-in-out group-hover:scale-105 group-hover:shadow-xl group-hover:rotate-[0.5deg]"
+  />
+</div>
+
         </div>
       ))}
     </div>

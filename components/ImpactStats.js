@@ -39,7 +39,12 @@ export default function ImpactStats() {
 
       <div className="flex flex-wrap justify-center gap-8 text-center">
         {stats.map((stat, i) => (
-          <div key={i} className="w-32 sm:w-40 md:w-48">
+          <div
+  key={i}
+  className="group rounded-2xl p-6 bg-white/10 border border-white/20 shadow-sm hover:shadow-xl hover:bg-white/20 hover:border-white/40 transform hover:scale-[1.03] transition-all duration-300 ease-in-out backdrop-blur cursor-pointer"
+>
+
+
             <h3 className="text-2xl md:text-3xl font-bold">{stat.value}</h3>
             <p className="text-sm text-white/80">{stat.label}</p>
           </div>
@@ -49,12 +54,14 @@ export default function ImpactStats() {
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {highlights.map((item, i) => (
           <div
-            key={i}
-            className="rounded-2xl p-6 bg-white/10 border border-white/20 shadow-sm hover:shadow-lg transition duration-300 backdrop-blur"
-          >
-            <div className="bg-white/20 w-10 h-10 flex items-center justify-center rounded-full mb-4">
-              {item.icon}
-            </div>
+  key={i}
+  className="rounded-2xl p-6 bg-white/10 border border-white/20 shadow-sm hover:shadow-xl hover:bg-white/20 hover:border-white/40 transform hover:scale-[1.03] transition-all duration-300 ease-in-out backdrop-blur cursor-pointer"
+>
+
+            <div className="bg-white/20 w-10 h-10 flex items-center justify-center rounded-full mb-4 group-hover:bg-white/30 transition-colors duration-300">
+  {item.icon}
+</div>
+
             <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
             <p className="text-white/80 text-sm">{item.description}</p>
           </div>
