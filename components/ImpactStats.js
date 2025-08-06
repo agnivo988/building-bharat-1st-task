@@ -1,10 +1,12 @@
-'use client';
-import { GraduationCap, Link2, Users } from 'lucide-react';
-import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
-import { useEffect, useState } from 'react';
+import { GraduationCap, Link2, Users } from "lucide-react";
+import { useEffect, useState } from "react";
+import CountUp from "react-countup";
+import { useInView } from "react-intersection-observer";
 
-const stats = [
+export default function ImpactStats() {
+  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
+  const [startCount, setStartCount] = useState(false);
+  const stats = [
   { value: 2500, suffix: '+', label: 'Students Trained' },
   { value: 1200, suffix: '+', label: 'Successful Placements' },
   { value: 50, suffix: '+', label: 'Partner Organizations' },
@@ -32,37 +34,33 @@ const highlights = [
   },
 ];
 
-export default function ImpactStats() {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.3 });
-  const [startCount, setStartCount] = useState(false);
+
 
   useEffect(() => {
-    if (inView) {
-      setStartCount(true);
-    }
+    if (inView) setStartCount(true);
   }, [inView]);
 
   return (
     <section
-      className="bg-gradient-to-b from-[#08C3BE] to-[#045D5B] text-white py-16 px-6 md:px-20 space-y-14"
       ref={ref}
+      className="bg-gradient-to-b from-[#08C3BE] to-[#045D5B] text-white py-16 px-4 sm:px-6 md:px-20 space-y-14"
     >
       {/* Title */}
       <div className="text-center space-y-2">
-        <h2 className="text-3xl md:text-4xl font-bold">Building Bharat Till Date</h2>
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold">Building Bharat Till Date</h2>
         <p className="text-white/80 text-sm md:text-base">
           Our journey in shaping India’s political and policy landscape
         </p>
       </div>
 
-      {/* Stats with CountUp */}
-      <div className="flex flex-wrap justify-center gap-8 text-center">
+      {/* Stats */}
+      <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
         {stats.map((stat, i) => (
           <div
             key={i}
-            className="group rounded-2xl p-6 bg-white/10 border border-white/20 shadow-sm hover:shadow-xl hover:bg-white/20 hover:border-white/40 transform hover:scale-[1.03] transition-all duration-300 ease-in-out backdrop-blur cursor-pointer"
+            className="group rounded-2xl p-4 sm:p-6 bg-white/10 border border-white/20 shadow-sm hover:shadow-xl hover:bg-white/20 hover:border-white/40 transform hover:scale-[1.03] transition-all duration-300 ease-in-out backdrop-blur cursor-pointer"
           >
-            <h3 className="text-2xl md:text-3xl font-bold">
+            <h3 className="text-xl sm:text-2xl md:text-3xl font-bold">
               {startCount ? (
                 <CountUp end={stat.value} duration={3.5} separator="," />
               ) : (
@@ -70,7 +68,7 @@ export default function ImpactStats() {
               )}
               {stat.suffix}
             </h3>
-            <p className="text-sm text-white/80">{stat.label}</p>
+            <p className="text-sm sm:text-base text-white/80">{stat.label}</p>
           </div>
         ))}
       </div>
@@ -85,8 +83,8 @@ export default function ImpactStats() {
             <div className="bg-white/20 w-10 h-10 flex items-center justify-center rounded-full mb-4 group-hover:bg-white/30 transition-colors duration-300">
               {item.icon}
             </div>
-            <h4 className="font-semibold text-lg mb-2">{item.title}</h4>
-            <p className="text-white/80 text-sm">{item.description}</p>
+            <h4 className="font-semibold text-base sm:text-lg mb-2">{item.title}</h4>
+            <p className="text-white/80 text-sm sm:text-base">{item.description}</p>
           </div>
         ))}
       </div>

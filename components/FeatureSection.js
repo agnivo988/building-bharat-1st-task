@@ -1,5 +1,5 @@
 'use client'
-import Image from 'next/image';
+import Image from 'next/image'
 
 const features = [
   {
@@ -10,7 +10,7 @@ const features = [
       'Q&A sessions with former parliamentarians',
       'Interactive policy workshops',
     ],
-    image: '/images/session.png', // replace with your image path
+    image: '/images/session.png',
   },
   {
     title: 'Guaranteed Job/Internship Opportunities',
@@ -42,34 +42,45 @@ const features = [
     ],
     image: '/images/mock-interview.png',
   },
-];
+]
 
 export default function FeatureSection() {
   return (
-    <div className="px-4 md:px-16 py-12 space-y-20 bg-white">
+    <section className="px-4 sm:px-8 md:px-16 py-10 sm:py-16 bg-white space-y-20">
       {features.map((feature, index) => (
-        <div key={index} className={`flex flex-col-reverse md:flex-row ${index % 2 !== 0 ? 'md:flex-row-reverse' : ''} items-center gap-10`}>
-          <div className="md:w-1/2 space-y-4">
-            <h3 className="text-xl font-semibold text-[#00473E]">{feature.title}</h3>
-            <p className="text-gray-700">{feature.description}</p>
-            <ul className="list-disc ml-5 text-gray-600 space-y-1">
+        <div
+          key={index}
+          className={`flex flex-col-reverse md:flex-row ${
+            index % 2 !== 0 ? 'md:flex-row-reverse' : ''
+          } items-center gap-10`}
+        >
+          {/* Text Block */}
+          <div className="md:w-1/2 space-y-6 sm:space-y-8 text-center md:text-left">
+            <h3 className="text-xl sm:text-2xl font-semibold text-[#00473E]">
+              {feature.title}
+            </h3>
+            <p className="text-gray-700 text-base sm:text-lg">{feature.description}</p>
+            <ul className="list-disc ml-5 text-gray-600 space-y-2 text-sm sm:text-base">
               {feature.points.map((point, i) => (
                 <li key={i}>{point}</li>
               ))}
             </ul>
           </div>
-          <div className="group relative w-full h-auto overflow-hidden rounded-xl shadow-md">
-  <Image
-    src={feature.image}
-    alt={feature.title}
-    width={600}
-    height={400}
-    className="transition-all duration-500 ease-in-out group-hover:scale-105 group-hover:shadow-xl group-hover:rotate-[0.5deg]"
-  />
-</div>
 
+          {/* Image Block */}
+          <div className="w-full max-w-md md:w-1/2">
+            <div className="group relative w-full overflow-hidden rounded-xl shadow-md">
+              <Image
+                src={feature.image}
+                alt={feature.title}
+                width={600}
+                height={400}
+                className="w-full h-auto object-contain transition-all duration-500 ease-in-out group-hover:scale-105 group-hover:shadow-xl group-hover:rotate-[0.5deg]"
+              />
+            </div>
+          </div>
         </div>
       ))}
-    </div>
-  );
+    </section>
+  )
 }
