@@ -23,5 +23,18 @@
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+@keyframes slide-scroll {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-slide-scroll {
+  animation: slide-scroll 30s linear infinite;
+}
+
 
 
